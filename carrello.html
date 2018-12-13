@@ -1,0 +1,215 @@
+<html>
+
+<head>
+
+	<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/carrello.css">
+	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  	<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+  	<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
+  	<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+  	<script>
+      
+    // Initialize Firebase
+    	var config = {
+      		apiKey: "AIzaSyC9obQa9i4jN_0_8mvwyOCjKf062vMRtZE",
+      		authDomain: "bofrost-fixed.firebaseapp.com",
+      		databaseURL: "https://bofrost-fixed.firebaseio.com",
+      		projectId: "bofrost-fixed",
+      		storageBucket: "bofrost-fixed.appspot.com",
+      		messagingSenderId: "1013418731440"
+    	};
+    	firebase.initializeApp(config);
+
+  	</script>
+  
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  	<script src="js/carrello.js"></script>
+
+	<title>Surgelati a domicilio GOFrost* | i surgelati di qualità</title>
+	<link rel="icon" href="img/snowflake.png" type="image/png" />
+
+</head>
+<body class="bg-light">
+
+    <div class="container">
+      <div class="py-5 text-center card" >
+        <img class="d-block mx-auto mb-4" src="img/logo.png" alt=""  height="72">
+        <h2>Carrello GOFrost</h2>
+        <p class="lead">Ricontrolla il tuo carrello e procedi con il pagamento.</p>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 order-md-2 mb-4">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Il tuo carrello</span>
+            <span class="badge badge-secondary badge-pill" id="nProducts"></span>
+          </h4>
+          <ul class="list-group mb-3" id="carrello">
+            
+         
+          </ul>
+        </div>
+        <div class="col-md-8 order-md-1">
+          <h4 class="mb-3">Indirizzo di Spedizione</h4>
+          <form class="needs-validation" novalidate>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="firstName">Nome</label>
+                <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                <div class="invalid-feedback">
+                 	Questo campo è obbligatorio
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="lastName">Cognome</label>
+                <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                <div class="invalid-feedback">
+                  Questo campo è obbligatorio
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email">Email <span class="text-muted"></span></label>
+              <input type="email" class="form-control" id="email" placeholder="mail@example.com">
+              <div class="invalid-feedback">
+                Email non valida
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="address">Indirizzo</label>
+              <input type="text" class="form-control" id="address" placeholder="Via Garibaldi 15" required>
+              <div class="invalid-feedback">
+               	Questo campo è obbligatorio
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-5 mb-3">
+                <label for="country">Nazione</label>
+                <select class="custom-select d-block w-100" id="country" required>
+                  <option value="">Choose...</option>
+                  option selected="" value="">seleziona</option><option value="afghanistan">afghanistan</option><option value="albania">albania</option><option value="algeria">algeria</option><option value="andorra">andorra</option><option value="angola">angola</option><option value="antarctica">antartico</option><option value="antigua and barbuda">antigua e barbuda</option><option value="saudi arabia">arabia saudita</option><option value="argentina">argentina</option><option value="armenia">armenia</option><option value="australia">australia</option><option value="australia christmas island">australia - isola christmas</option><option value="australia norfolk island">australia - isola norfolk</option><option value="australia cocos keeling islands">australia - isole cocos</option><option value="heard and mc donald islands">australia - isole heard e mcdonald</option><option value="austria">austria</option><option value="azerbaijan">azerbaijan</option><option value="bahamas">bahamas</option><option value="bahrain">bahrain</option><option value="bangladesh">bangladesh</option><option value="barbados">barbados</option><option value="belgium">belgio</option><option value="belize">belize</option><option value="benin">benin</option><option value="bhutan">bhutan</option><option value="belarus">bielorussia</option><option value="bolivia">bolivia</option><option value="bosnia herzegovina">bosnia erzegovina</option><option value="botswana">botswana</option><option value="brazil">brasile</option><option value="brunei">brunei</option><option value="bulgaria">bulgaria</option><option value="burkina faso">burkina faso</option><option value="burundi">burundi</option><option value="cambodia">cambogia</option><option value="cameroon">camerun</option><option value="canada">canada</option><option value="cape verde">capo verde</option><option value="chad">ciad</option><option value="chile">cile</option><option value="china">cina</option><option value="china hong kong">cina - hong kong</option><option value="china macau">cina - macao</option><option value="cyprus">cipro</option><option value="holy see">citta' del vaticano</option><option value="colombia">colombia</option><option value="comoros">comore</option><option value="north korea">corea del nord</option><option value="south korea">corea del sud</option><option value="cote divoire">costa d'avorio</option><option value="costa rica">costa rica</option><option value="croatia">croazia</option><option value="cuba">cuba</option><option value="denmark">danimarca</option><option value="denmark faroe islands">danimarca - isole faroe</option><option value="dominica">dominica</option><option value="ecuador">ecuador</option><option value="egypt">egitto</option><option value="el salvador">el salvador</option><option value="united arab emirates">emirati arabi uniti</option><option value="eritrea">eritrea</option><option value="estonia">estonia</option><option value="ethiopia">etiopia</option><option value="fiji">figi</option><option value="philippines">filippine</option><option value="finland">finlandia</option><option value="finland aland islands">finlandia - isole aland</option><option value="france">francia</option><option value="france guadeloupe">francia - guadalupa</option><option value="france french guiana">francia - guyana francese</option><option value="france martinique">francia - martinica</option><option value="france mayotte">francia - mayotte</option><option value="france new caledonia">francia - nuova caledonia</option><option value="france french polynesia">francia - polinesia francese</option><option value="france reunion">francia - reunion</option><option value="france saint pierre and miquelon">francia - saint pierre e miquelon</option><option value="france french southern territories">francia - territori francesi meridionali</option><option value="france wallis and futuna islands">francia - wallis e futuna</option><option value="gabon">gabon</option><option value="gambia">gambia</option><option value="georgia">georgia</option><option value="germany">germania</option><option value="ghana">ghana</option><option value="jamaica">giamaica</option><option value="japan">giappone</option><option value="djibouti">gibuti</option><option value="jordan">giordania</option><option value="greece">grecia</option><option value="grenada">grenada</option><option value="greenland">groenlandia</option><option value="guatemala">guatemala</option><option value="guinea">guinea</option><option value="equatorial guinea">guinea equatoriale</option><option value="guinea bissau">guinea-bissau</option><option value="guyana">guyana</option><option value="haiti">haiti</option><option value="honduras">honduras</option><option value="india">india</option><option value="indonesia">indonesia</option><option value="iran">iran</option><option value="iraq">iraq</option><option value="ireland">irlanda</option><option value="iceland">islanda</option><option value="marshall islands">isole marshall</option><option value="solomon islands">isole salomone</option><option value="israel">israele</option><option value="italy" selected="selected">italia</option><option value="kazakhstan">kazakistan</option><option value="kenya">kenya</option><option value="kyrgyzstan">kirghizistan</option><option value="kiribati">kiribati</option><option value="kuwait">kuwait</option><option value="laos">laos</option><option value="lesotho">lesotho</option><option value="latvia">lettonia</option><option value="lebanon">libano</option><option value="liberia">liberia</option><option value="libya">libia</option><option value="liechtenstein">liechtenstein</option><option value="lithuania">lituania</option><option value="luxembourg">lussemburgo</option><option value="macedonia">macedonia</option><option value="madagascar">madagascar</option><option value="malawi">malawi</option><option value="maldives">maldive</option><option value="malaysia">malesia</option><option value="mali">mali</option><option value="malta">malta</option><option value="morocco">marocco</option><option value="mauritania">mauritania</option><option value="mauritius">mauritius</option><option value="mexico">messico</option><option value="micronesia">micronesia</option><option value="moldova">moldavia</option><option value="mongolia">mongolia</option><option value="montenegro">montenegro</option><option value="mozambique">mozambico</option><option value="myanmar">myanmar</option><option value="namibia">namibia</option><option value="nauru">nauru</option><option value="nepal">nepal</option><option value="nicaragua">nicaragua</option><option value="niger">niger</option><option value="nigeria">nigeria</option><option value="norway">norvegia</option><option value="norway bouvet island">norvegia - isola bouvet</option><option value="norway svalbard and jan mayen islands">norvegia - svalbard</option><option value="new zealand">nuova zelanda</option><option value="new zealand cook islands">nuova zelanda - isole cook</option><option value="new zealand niue">nuova zelanda - niue</option><option value="new zealand tokelau">nuova zelanda - tokelau</option><option value="holland">olanda</option><option value="oman">oman</option><option value="netherlands">paesi bassi</option><option value="netherlands netherlands antilles">paesi bassi - antille olandesi</option><option value="netherlands aruba">paesi bassi - aruba</option><option value="pakistan">pakistan</option><option value="palau">palau</option><option value="palestine">palestina</option><option value="panama">panama</option><option value="papua new guinea">papua nuova guinea</option><option value="paraguay">paraguay</option><option value="peru">peru'</option><option value="poland">polonia</option><option value="puerto rico">porto rico</option><option value="portugal">portogallo</option><option value="principality of monaco">principato di monaco</option><option value="qatar">qatar</option><option value="united kingdom">regno unito</option><option value="united kingdom anguilla">regno unito - anguilla</option><option value="united kingdom bermuda">regno unito - bermuda</option><option value="united kingdom gibraltar">regno unito - gibilterra</option><option value="united kingdom guernsey">regno unito - guernsey</option><option value="united kingdom isle of man">regno unito - isola di man</option><option value="united kingdom cayman islands">regno unito - isole cayman</option><option value="united kingdom falkland islands">regno unito - isole falkland</option><option value="united kingdom pitcairn">regno unito - isole pitcairn</option><option value="united kingdom south sandwich islands">regno unito - isole sandwich meridionali</option><option value="united kingdom turks and caicos islands">regno unito - isole turks e caicos</option><option value="united kingdom british virgin islands">regno unito - isole vergini britanniche</option><option value="united kingdom jersey">regno unito - jersey</option><option value="united kingdom monttserrat">regno unito - montserrat</option><option value="united kingdom saint helena">regno unito - sant'elena</option><option value="united kingdom british indian ocean territory">regno unito - terr. britannico dell'oceano indiano</option><option value="czech republic">repubblica ceca</option><option value="central african republic">repubblica centrafricana</option><option value="republic of the congo">repubblica del congo</option><option value="democratic republic of the congo">repubblica democratica del congo (ex zaire)</option><option value="republic of san marino">repubblica di san marino</option><option value="dominican republic">repubblica dominicana</option><option value="romania">romania</option><option value="rwanda">ruanda</option><option value="russia">russia</option><option value="western sahara">sahara occidentale</option><option value="saint vincent and the grenadines">saint vincent e grenadines</option><option value="samoa">samoa</option><option value="saint kitts and nevis">san kitts e nevis</option><option value="saint lucia">santa lucia</option><option value="sao tome and principe">sao tome e principe</option><option value="senegal">senegal</option><option value="serbia">serbia</option><option value="seyschelles">seychelles</option><option value="sierra leone">sierra leone</option><option value="singapore">singapore</option><option value="syria">siria</option><option value="slovakia">slovacchia</option><option value="slovenia">slovenia</option><option value="somalia">somalia</option><option value="spain">spagna</option><option value="sri lanka">sri lanka</option><option value="united states of america">stati uniti d'america</option><option value="united states of america guam">stati uniti d'america - guam</option><option value="united states of america northern mariana islands">stati uniti d'america - isole marianne settentrionali</option><option value="united states of america minor outlyng islands">stati uniti d'america - isole periferiche secondarie</option><option value="united states of america virgin islands">stati uniti d'america - isole vergini statunitensi</option><option value="united states of america american samoa">stati uniti d'america - samoa americane</option><option value="south africa">sud africa</option><option value="sudan">sudan</option><option value="suriname">suriname</option><option value="sweden">svezia</option><option value="switzerland">svizzera</option><option value="swaziland">swaziland</option><option value="tajikistan">tagikistan</option><option value="thailand">tailandia</option><option value="taiwan">taiwan</option><option value="tanzania">tanzania</option><option value="east timor">timor dell'est</option><option value="togo">togo</option><option value="tonga">tonga</option><option value="trinidad and tobago">trinidad e tobago</option><option value="tunisia">tunisia</option><option value="turkey">turchia</option><option value="turkmenistan">turkmenistan</option><option value="tuvalu">tuvalu</option><option value="ukraine">ucraina</option><option value="uganda">uganda</option><option value="hungary">ungheria</option><option value="uruguay">uruguay</option><option value="uzbekistan">uzbekistan</option><option value="vanuatu">vanuatu</option><option value="venezuela">venezuela</option><option value="vietnam">vietnam</option><option value="yemen">yemen</option><option value="zambia">zambia</option><option value="zimbabwe">zimbabwe</option>
+                </select>
+                <div class="invalid-feedback">
+                  Questo campo è obbligatorio
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+             <label for="address">Città</label>
+              <input type="text" class="form-control" id="city" placeholder="Milano" required>
+              <div class="invalid-feedback">
+               	Questo campo è obbligatorio
+              </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="zip">Zip</label>
+                <input type="text" class="form-control" id="zip" placeholder="" required>
+                <div class="invalid-feedback">
+                  Questo campo è obbligatorio
+                </div>
+              </div>
+            </div>
+            <hr class="mb-4">
+      
+
+            <h4 class="mb-3">Pagamento</h4>
+
+            <div class="d-block my-3">
+              <div class="custom-control custom-radio">
+                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+                <label class="custom-control-label" for="credit">Carta di credito</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
+                <label class="custom-control-label" for="debit">Carta di debito</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
+                <label class="custom-control-label" for="paypal">Paypal</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="cc-name">Name dell'intestatario</label>
+                <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                <small class="text-muted">Nome riportato sulla carta</small>
+                <div class="invalid-feedback">
+                  Questo campo è obbligatorio
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="cc-number">Numero della carta</label>
+                <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                <div class="invalid-feedback">
+                  Questo campo è obbligatorio
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 mb-3">
+                <label for="cc-expiration">Scadenza</label>
+                <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                <div class="invalid-feedback">
+                  Questo campo è obbligatorio
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="cc-expiration">CVV</label>
+                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                <div class="invalid-feedback">
+                  Questo campo è obbligatorio
+                </div>
+              </div>
+            </div>
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Procedi con il pagamento</button>
+          </form>
+        </div>
+      </div>
+
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2017-2018 GOFrost</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#">Privacy</a></li>
+          <li class="list-inline-item"><a href="#">Termini</a></li>
+          <li class="list-inline-item"><a href="#">Supporto</a></li>
+        </ul>
+      </footer>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/vendor/holder.min.js"></script>
+    <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (function() {
+        'use strict';
+
+        window.addEventListener('load', function() {
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          var forms = document.getElementsByClassName('needs-validation');
+
+          // Loop over them and prevent submission
+          var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+              if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add('was-validated');
+            }, false);
+          });
+        }, false);
+      })();
+    </script>
+  </body>
+</html>
